@@ -41,11 +41,29 @@
             transition: 0.3s;
         }
 
+        /* Nav Layout Classes (Moved from inline styles to here for mobile control) */
+        .nav-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-center {
+            flex: 0 0 auto;
+            text-align: center;
+        }
+
+        .nav-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
         /* dark mode for nav */
         .dark-mode {
             color: white !important;
         }
-        
         .dark-mode .logo { color: white; }
 
         /* Search bar styles */
@@ -227,6 +245,7 @@
             object-fit: cover;
         }
 
+        /* --- TABLET AND MOBILE FIXES --- */
         @media (max-width: 968px) {
             h1 { font-size: 2.8rem; }
             .experiments-grid { grid-template-columns: 1fr 1fr; } 
@@ -234,9 +253,44 @@
         }
 
         @media (max-width: 640px) {
+            /* Fix nav spacing */
+            nav { 
+                flex-wrap: wrap; 
+                padding: 12px 20px; /* Reduced padding for mobile */
+            }
+            
+            /* Hide the right button section on mobile */
+            .nav-right {
+                display: none !important;
+            }
+
+            /* Make logo take full width/center */
+            .nav-center {
+                flex: 1;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            /* Move search to bottom */
+            .nav-left {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* Fix search bar width */
+            .search-nav { 
+                width: 100%; 
+                max-width: 100%; 
+            }
+            
             .experiments-grid { grid-template-columns: 1fr; } 
-            nav { flex-wrap: wrap; }
-            .search-nav { order: 3; width: 100%; max-width: 100%; margin-top: 10px; }
+            
+            /* Make title smaller */
+            h1 { font-size: 2.1rem; }
+            
+            .hero { padding-left: 20px; padding-right: 20px; }
+            .section { padding: 60px 20px; }
         }
 
         .nav-button {
@@ -408,18 +462,18 @@
 <body>
 
     <nav id="navbar">
-        <div class="nav-left" style="flex: 1; display: flex; align-items: center; gap: 24px;">
+        <div class="nav-left">
             <div class="search-nav">
                 <span class="search-nav-icon">🔍</span>
                 <input type="text" id="searchInput" placeholder="Search experiments...">
             </div>
         </div>
         
-        <div class="nav-center" style="flex: 0 0 auto; text-align: center;">
+        <div class="nav-center">
             <div class="logo">Chemistry Expermient Portfolio</div>
         </div>
 
-        <div class="nav-right" style="flex: 1; display: flex; justify-content: flex-end;">
+        <div class="nav-right">
             <a href="#home" class="nav-button secondary">Experiments</a>
         </div>
     </nav>
@@ -590,10 +644,10 @@
 
                 container.innerHTML += `
                 <a href="${href}" class="experiment-card fade-in" 
-                   data-title="${item.title.toLowerCase()}" 
-                   data-badge="${item.badge.toLowerCase()}" 
-                   data-desc="${item.desc.toLowerCase()}" 
-                   style="transition-delay: ${delay}s">
+                    data-title="${item.title.toLowerCase()}"
+                    data-badge="${item.badge.toLowerCase()}"
+                    data-desc="${item.desc.toLowerCase()}"
+                    style="transition-delay: ${delay}s">
                     <div class="experiment-img">
                         <img src="${genericImage}" alt="${item.title}">
                     </div>
@@ -698,7 +752,6 @@
 
         emailLink.addEventListener('click', function(e) {
             e.stopPropagation(); 
-            
             if (emailBubble.style.display === 'block') {
                 emailBubble.style.display = 'none';
             } else {
