@@ -7,14 +7,20 @@
     <title>Chemistry Practicals Hub</title>
     
     <style>
-        /* Main body settings */
+        /* --- GLOBAL OVERFLOW FIX --- */
+        /* This prevents the "white column" on mobile */
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0; 
+            padding: 0;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #fafafa;
             color: #1a1a1a;
-            overflow-x: hidden;
-            margin: 0; 
-            padding: 0;
             line-height: 1.6;
         }
 
@@ -28,6 +34,7 @@
         nav {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
             padding: 16px 40px;
             display: flex;
@@ -41,7 +48,7 @@
             transition: 0.3s;
         }
 
-        /* Nav Layout Classes (Moved from inline styles to here for mobile control) */
+        /* Nav Layout Classes */
         .nav-left {
             flex: 1;
             display: flex;
@@ -98,7 +105,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow: hidden; /* Ensures the glowing circle doesn't cause scroll */
             padding: 140px 40px 80px;
         }
 
@@ -245,6 +252,13 @@
             object-fit: cover;
         }
 
+        /* Info Banner Styles (Moved from inline) */
+        .info-banner {
+            background: #fff; 
+            padding: 60px 40px; 
+            border-bottom: 1px solid #e8e8e8;
+        }
+
         /* --- TABLET AND MOBILE FIXES --- */
         @media (max-width: 968px) {
             h1 { font-size: 2.8rem; }
@@ -289,8 +303,10 @@
             /* Make title smaller */
             h1 { font-size: 2.1rem; }
             
-            .hero { padding-left: 20px; padding-right: 20px; }
+            /* Reduce padding significantly on mobile to prevent squashing/overflow */
+            .hero { padding: 100px 20px 60px; }
             .section { padding: 60px 20px; }
+            .info-banner { padding: 50px 20px; }
         }
 
         .nav-button {
@@ -486,7 +502,7 @@
         </div>
     </div>
 
-    <div class="info-banner" id="about" style="background: #fff; padding: 60px 40px; border-bottom: 1px solid #e8e8e8;">
+    <div class="info-banner" id="about">
         
         <div style="max-width: 800px; margin: 0 auto 40px; text-align: center;">
             <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;">About This Project</h2>
